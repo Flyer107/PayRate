@@ -1,0 +1,290 @@
+//Calculates and displays the gross pay for each employee and the total gross pay for a division
+//This program utilizes enumerated types (Bonuses).
+//created by Kwesi Owubah on 06/28/2019
+
+#include <iostream>
+
+using namespace std;
+
+//function prototypes
+double getGrosspay(double, double, int);
+//double getTotalGrossPay(double);
+
+//If an employee works an extra day, extra hours are added (As a bonus) depending on the day.
+//enum daysOfweek { Sun = 3, Mon = 1, Tue = 1, Wed = 1, Thu = 1, Fri = 2, Sat = 3, reset = 0 };
+
+enum daysOfweek { Sun, Mon, Tue, Wed, Thu, Fri, Sat, reset };
+
+//string& operator>>(string& str, daysOfweek day) {
+//	if ( day == Sun ) {
+//		str = "Sunday";
+//	}
+//	else if (day == Mon) {
+//		str = "Monday";
+//	}
+//	else if (day == Tue) {
+//		str = "Tuesday";
+//	}
+//	else if (day == Wed) {
+//		str = "Wednesday";
+//	}
+//	else if (day == Thu) {
+//		str = "Thursday";
+//	}
+//	else if (day == Fri) {
+//		str = "Friday";
+//	}
+//	else if (day == Sat) {
+//		str = "Satruday";
+//	}
+//	else {
+//		str = "???";
+//	}
+//return str;
+//}
+
+//crl kC
+//ctrl ku
+
+// double& operator>>(double& val, daysOfweek day) {
+//	if (day == Sun) {
+//		val = 3;
+//	}
+//	else if (day == Mon) {
+//		val = 1;
+//	}
+//	else if (day == Tue) {
+//		val = 1;
+//	}
+//	else if (day == Wed) {
+//		val = 1;
+//	}
+//	else if (day == Thu) {
+//		val = 1;
+//	}
+//	else if (day == Fri) {
+//		val = 2;
+//	}
+//	else if (day == Sat) {
+//		val = 3;
+//	}
+//	else if (day == reset) {
+//		val = 0;
+//	}
+//	else {
+//		val = -1;
+//	}
+//	return val;
+//}
+
+//Overload Input stream daysOfweek& x
+istream& operator>> ( istream& in, daysOfweek& x ) {
+	int val;
+	if (in >> val) {
+		switch (val) {
+		case Sun:
+			//2val = 3;
+			//3x = daysOfweek(val);
+			//3break;
+		case Mon:
+			//2val = 1;
+			//3x = daysOfweek(val);
+			//3break;
+		case Tue:
+			//2val = 1;
+			//3x = daysOfweek(val);
+			//3break;
+		case Wed:
+			//2val = 1;
+			//3x = daysOfweek(val);
+			//3break;
+		case Thu:
+			//2val = 1;
+			//3x = daysOfweek(val);
+			//3break;
+		case Fri:
+			//2val = 2;
+			//3x = daysOfweek(val);
+			//3break;
+		case Sat:
+			//2val = 3;
+			//3x = daysOfweek(val);
+			//3break;
+			x = daysOfweek(val); //1
+			break;				//1
+		default:
+			throw out_of_range("Invalid value for type daysOfweek");
+		}
+	} 
+	return in;
+}
+
+//Doesn't register when I input string
+int main()
+{
+	//declaring variables
+
+	double hoursWorked = 0.0;
+	//string extraDay;
+	//string extraDay = "";
+	//double extraDay;
+	daysOfweek extraDay;
+	//daysOfweek& extraDay;
+	int eDayVal = 0;
+	//int eDayVal;
+	//int extraDay;
+	//daysOfweek extraDay;
+
+	//String extraDay = " ";
+	char bonusDay = ' ';
+	char response = ' ';
+	double payRate = 0.0;
+	double grossPay = 0.0;
+	string name = "";
+
+	double totalGrossPay = 0.0;
+
+	//Ask if there is another employee
+		cout << " Is there an Employee? (Y for yes, N for No): " << endl;
+		cin >> response;
+	do
+	{
+		//extraDay = reset;
+		//enter input variables 
+		cout << " Name: " << endl;
+		cin >> name;
+		cout << " Enter hours " << name << " has worked: " << endl;
+		cin >> hoursWorked;
+		//determine hours worked
+		if (hoursWorked > 40)
+			hoursWorked = hoursWorked + (1.5 * hoursWorked);
+		cout << " Enter pay rate: " << endl;
+		cin >> payRate;
+
+		cout << "Did " << name << " work an extra day this week? (Y for yes) " << endl;
+		cin >> bonusDay;
+		if (bonusDay == 'Y' || bonusDay == 'y') {
+			cout << " Which day did " << name << " work extra for this week? [0(Sun), 1(Mon), 2(Tue), 3(Wed), 4(Thu), 5(Fri), 6(Sat)]" << endl;
+			try {
+				cin >> extraDay;
+				switch (extraDay) {
+					case Sun:
+						eDayVal = 3;
+						cout << "Heeeeeeey" << eDayVal << endl;
+						break;
+					case Mon:
+						eDayVal = 1;
+						break;
+					case Tue:
+						eDayVal = 1;
+						break;
+					case Wed:
+						eDayVal = 1;
+						break;
+					case Thu:
+						eDayVal = 1;
+						break;
+					case Fri:
+						eDayVal = 2;
+						break;
+					case Sat:
+						eDayVal = 3;
+						break;
+				default:
+					throw out_of_range("Invalid value for type daysOfweek");
+					break;
+				}//end switch
+			}
+			catch (out_of_range e) {
+				//Error stream
+				cerr << e.what() << endl;
+			}
+
+			//std::cin >> extraDay;
+			//daysOfweek extraIday = (daysOfweek)extraDay;
+			//daysOfweek extraIday = static_cast<daysOfweek>(extraDay);
+			
+			//try {
+			//	std::cin >> extraDay;
+			//	std::cout << extraDay << endl;
+			//}
+			//catch (out_of_range& e) {
+			//	//Error stream
+			//	cerr << e.what() << endl;
+			//}
+			//
+			//std::istream enum daysOfweek; // extraDay;
+			//cin >> extraDay;
+			//cin.getline(cin, extraDay);
+			//cin.getline( extraDay, 55);
+			//std::getline(std::cin, extraDay);
+			//cin >> extraDay;
+			
+		}//end bonus 
+
+		/*enum Throws { R = 'R', P = 'P', S = 'S' };
+		char userInput;
+		cout << "What is your throw : ";
+		cin >> userInput;
+		Throws userThrow = (Throws)userInput;*/
+
+
+		/*int userInput;
+		std::cin >> userInput;
+		Throws userThrow = static_cast<Throws>(userInput);*/
+
+		//Resets for the next Employee
+		
+		//extraDay = 0.0;
+
+		cout << "Heeeeeeey" << eDayVal << endl;
+
+		//call function to calculate gross pay
+		grossPay = getGrosspay(hoursWorked, payRate, eDayVal);
+
+		//call function to calculate total gross pay
+		totalGrossPay += grossPay;
+		//totalGrossPay = getTotalGrossPay(grossPay);
+
+		//display gross pay and total gross pay
+		cout << "Gross pay: " << grossPay << endl;
+		
+
+		cout << " Another Employee? (Y for yes, N for No): " << endl;
+		cin >> response;
+	} while (response == 'Y' || response =='y');
+
+	cout << "Total gross pay: " << totalGrossPay << endl;
+
+
+	system("pause");
+	return 0;
+}
+
+//*****function definitions*****
+double getGrosspay(double workedHours, double ratePay, int dayExtra){
+	double grossPay = 0.0;
+	grossPay = (workedHours + dayExtra) * ratePay;
+	return grossPay;
+}
+
+//Overload Output Stream
+//ostream& operator<< (ostream& out, const daysOfweek& x) {
+//	switch (x) {
+//	case Sun:
+//		out << 3;
+//	case Mon:
+//		out << 1;
+//	case Tue:
+//		out << 1;
+//	case Wed:
+//		out << 1;
+//	case Thu:
+//		out << 1;
+//	case Fri:
+//		out << 2;
+//	case Sat:
+//		out << 3;
+//	}
+//	return out;
+//}
